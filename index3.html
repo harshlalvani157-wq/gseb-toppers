@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>GSEB TOPPERS — Glass Cube Motion</title>
+<style>
+  :root {
+    --bg-light: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
+    --gold1: #d4af37; /* Main gold color */
+    --gold2: #ffd700; /* Brighter gold */
+    --gold-glow: rgba(212, 175, 55, 0.4); /* Glow color */
+    --text-dark: #222;
+    --muted: #555;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    font-family: "Inter", system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 12px;
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .text-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(38px, 8vw, 90px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-dark);
+    text-decoration: underline;
+    text-decoration-thickness: 2.5px;
+    text-underline-offset: 6px;
+  }
+
+  .visual-wrap {
+    width: 220px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+  }
+
+  .cube {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out;
+  }
+
+  .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1.5px solid rgba(212, 175, 55, 0.6);
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.3), rgba(212, 175, 55, 0.15));
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    box-shadow:
+      0 0 18px var(--gold-glow),
+      inset 0 0 8px rgba(255, 215, 0, 0.25);
+    backface-visibility: hidden;
+  }
+
+  /* Cube faces */
+  .face.front { transform: translateZ(75px); }
+  .face.back { transform: rotateY(180deg) translateZ(75px); }
+  .face.right { transform: rotateY(90deg) translateZ(75px); }
+  .face.left { transform: rotateY(-90deg) translateZ(75px); }
+  .face.top { transform: rotateX(90deg) translateZ(75px); }
+  .face.bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+  /* Button Styles */
+  .button-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cube-button {
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.3), rgba(212, 175, 55, 0.15));
+    border: 1.5px solid rgba(212, 175, 55, 0.6);
+    border-radius: 12px;
+    box-shadow:
+      0 0 18px var(--gold-glow),
+      inset 0 0 8px rgba(255, 215, 0, 0.25);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+
+  /* Link styling inside button */
+  .cube-button a {
+    color: var(--text-dark);
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cube-button a:visited {
+    color: var(--text-dark);
+  }
+
+  .cube-button:hover {
+    box-shadow:
+      0 0 25px var(--gold-glow),
+      inset 0 0 12px rgba(255, 215, 0, 0.35);
+    transform: scale(1.03);
+  }
+
+  .cube-button:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: 900px) {
+    .main-container {
+      gap: 28px;
+    }
+    .text-section {
+      text-align: center;
+    }
+    .button-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: clamp(30px, 7vw, 55px);
+    }
+    .visual-wrap {
+      width: 170px;
+      height: 170px;
+    }
+    .cube {
+      width: 120px;
+      height: 120px;
+    }
+    .face.front { transform: translateZ(60px); }
+    .face.back { transform: rotateY(180deg) translateZ(60px); }
+    .face.right { transform: rotateY(90deg) translateZ(60px); }
+    .face.left { transform: rotateY(-90deg) translateZ(60px); }
+    .face.top { transform: rotateX(90deg) translateZ(60px); }
+    .face.bottom { transform: rotateX(-90deg) translateZ(60px); }
+    .cube-button {
+      padding: 12px 24px;
+      font-size: 15px;
+      width: 80%;
+      max-width: 250px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="text-section">
+      <h1><u>GSEB<br>TOPPERS</u></h1>
+    </div>
+
+    <div class="visual-wrap">
+      <div class="cube" id="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face right"></div>
+        <div class="face left"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <a href="/speed.html" class="cube-button">Let's Study</a>
+      <a href="/more.html" class="cube-button">Learn More</a>
+    </div>
+  </div>
+
+  <script>
+    const cube = document.getElementById('cube');
+    let targetX = 15, targetY = -30;
+    let currentX = 15, currentY = -30;
+
+    document.addEventListener('mousemove', e => {
+      const xRatio = (e.clientX / window.innerWidth - 0.5) * 2;
+      const yRatio = (e.clientY / window.innerHeight - 0.5) * 2;
+      targetY = xRatio * 40;
+      targetX = -yRatio * 30;
+    });
+
+    let lastTouchX = 0, lastTouchY = 0;
+    document.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      lastTouchX = t.clientX;
+      lastTouchY = t.clientY;
+    });
+
+    document.addEventListener('touchmove', e => {
+      const t = e.touches[0];
+      const dx = t.clientX - lastTouchX;
+      const dy = t.clientY - lastTouchY;
+      lastTouchX = t.clientX;
+      lastTouchY = t.clientY;
+      targetY += dx * 0.3;
+      targetX -= dy * 0.3;
+    });
+
+    function animate() {
+      currentX += (targetX - currentX) * 0.07;
+      currentY += (targetY - currentY) * 0.07;
+      cube.style.transform = `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
